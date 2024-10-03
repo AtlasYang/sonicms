@@ -68,6 +68,7 @@ services:
       - STORAGE_ACCESS_KEY=${STORAGE_ACCESS_KEY}
       - STORAGE_SECRET_KEY=${STORAGE_SECRET_KEY}
       - ONNX_MODEL_PATH=${ONNX_MODEL_PATH}
+      - TOKENIZER_PATH=${TOKENIZER_PATH}
     network_mode: host
     depends_on:
       main-database:

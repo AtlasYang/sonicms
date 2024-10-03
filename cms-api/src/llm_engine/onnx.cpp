@@ -52,7 +52,7 @@ namespace LLMEngine { namespace OnnxRuntime {
     }
     
     std::vector<float> OnnxModel::get_sentence_embedding(const char* sentence) {
-        const char* json_path = "../assets/tokenizer.json";
+        const char* json_path = std::getenv("TOKENIZER_PATH") ? std::getenv("TOKENIZER_PATH") : "../assets/tokenizer.json";
 
         LLMEngine::Tokenizer tokenizer(json_path);
 

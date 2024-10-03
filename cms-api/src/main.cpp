@@ -34,8 +34,7 @@ void run() {
 
   auto connectionHandler = oatpp::web::server::HttpConnectionHandler::createShared(router);
 
-  // int port = std::stoi(std::getenv("CMS_API_PORT"));
-  v_uint16 port = 3003;
+  int port = std::getenv("CMS_API_PORT") ? std::stoi(std::getenv("CMS_API_PORT")) : 3003;
   auto connectionProvider = oatpp::network::tcp::server::ConnectionProvider::createShared({"0.0.0.0", port, oatpp::network::Address::IP_4});
 
   oatpp::network::Server server(connectionProvider, connectionHandler);

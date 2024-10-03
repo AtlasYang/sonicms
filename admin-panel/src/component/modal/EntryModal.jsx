@@ -5,6 +5,7 @@ import { TfiText } from "react-icons/tfi";
 import useService from "../../lib/useService";
 import { showToast } from "../../lib/toast";
 import { useState } from "react";
+import { unixTimestampToDateTimeString } from "../../util/timestamp";
 
 export default function EntryModal({ collectionName, entry, close }) {
   const { entryService } = useService();
@@ -39,6 +40,10 @@ export default function EntryModal({ collectionName, entry, close }) {
       <h4>
         {collectionName} - {entry.entry_id}
       </h4>
+      <p>
+        Last updated:{" "}
+        <span>{unixTimestampToDateTimeString(entry.updated_at)}</span>
+      </p>
       <label>Data</label>
       <div className="schema-list stretch">
         {entry.data &&

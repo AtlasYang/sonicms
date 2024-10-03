@@ -129,10 +129,14 @@
 }
 
 .textarea {
+    width: 50%;
+    height: 72px;
+    resize: none;
     padding: 10px;
     border: 1px solid #e2e1df;
+    font-family: inherit;
     border-radius: 5px;
-    background-color: #e2e1df51;
+    background-color: #ffffff;
     font-size: 0.9rem;
     transition: border-color 0.3s;
 }
