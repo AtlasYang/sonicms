@@ -1,0 +1,81 @@
+.modal-main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 60%;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.modal-main h3 {
+    font-size: 1.5rem;
+}
+
+.modal-main label {
+    font-size: 1.0rem;
+}
+
+.close-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.schema-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    overflow-y: auto;
+}
+
+.schema-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-color: #F5F5F5;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.schema-item h4 {
+    flex: 1;
+}
+
+.schema-item p {
+    flex: 1;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.schema-item p span {
+    font-weight: bold;
+}
+
+.schema-form {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-end;
+}

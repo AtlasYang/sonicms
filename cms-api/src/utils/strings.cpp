@@ -58,6 +58,10 @@ namespace Utils { namespace Strings {
                     return false;
                 } else if (type == "integer" && !data[key].is_number_integer()) {
                     return false;
+                } else if (type == "number" && !data[key].is_number()) {
+                    return false;
+                } else if (type == "boolean" && !data[key].is_boolean()) {
+                    return false;
                 } else if (type == "object") {
                     if (!data[key].is_object()) {
                         return false;

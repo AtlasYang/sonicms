@@ -1,0 +1,122 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100%;
+  background-color: var(--primary);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  max-width: 240px;
+  background-color: var(--primary);
+
+  padding: 50px 10px;
+  transition: width 0.2s ease-in-out;
+}
+
+.sidebar img {
+  max-width: 200px;
+}
+
+.sidebar .sidebar-img-small {
+  display: none;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(200, 200, 200, 0.5);
+}
+
+.sidebar .menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 60px;
+  gap: 10px;
+}
+
+.sidebar .menu .menu-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  gap: 10px;
+
+  border-radius: 5px;
+  color: #FFFFFF;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+
+.sidebar .menu .menu-item.selected {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar .menu .menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+
+  background-color: #FFFFFF;
+  box-shadow: -2px 0px 5px 1px rgba(179, 179, 179, 0.6);
+  -webkit-box-shadow: -2px 0px 5px 1px rgba(179, 179, 179, 0.6);
+  -moz-box-shadow: -2px 0px 5px 1px rgba(179, 179, 179, 0.6);
+
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .sidebar .sidebar-img-big {
+    display: none;
+  }
+
+  .sidebar .sidebar-img-small {
+    display: block;
+  }
+
+  .menu {
+    align-items: center;
+  }
+
+  .menu-item {
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 10px;
+  }
+
+  .menu-item svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-item p {
+    display: none;
+  }
+
+  .menu-item:hover p {
+    position: absolute;
+    top: 0;
+    left: 110%;
+    display: block;
+    padding: 10px;
+    background-color: #626262f3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    z-index: 100;
+  }
+}

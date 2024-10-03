@@ -39,11 +39,12 @@ namespace LLMEngine { namespace OnnxRuntime {
         }
     }
 
-    OnnxModel::OnnxModel(const char* model_path) {
+    OnnxModel::OnnxModel() {
         Ort::Env env(ORT_LOGGING_LEVEL_WARNING, "test");
         Ort::SessionOptions session_options;
+        const char* model_path = std::getenv("ONNX_MODEL_PATH") ? std::getenv("ONNX_MODEL_PATH") : "../assets/model.onnx";
         onnx_session = std::make_shared<Ort::Session>(env, model_path, session_options);
-
+        std::cout << "Onnx Model loaded" << std::endl;
     }
 
     OnnxModel::~OnnxModel() {

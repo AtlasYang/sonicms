@@ -1,0 +1,259 @@
+.screen-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
+
+.screen-main h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.screen-main h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.screen-main label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #767676;
+    margin-bottom: 5px;
+}
+
+.screen-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+}
+
+.screen-box div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.screen-box div h3 {
+    font-size: 1rem;
+}
+
+.screen-box div p {
+    font-size: 0.85rem;
+}
+
+.collection-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    overflow-y: auto;
+}
+
+.collection-list .collection-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.collection-list .collection-item:hover {
+    background-color: #e2e1df;
+}
+
+.collection-list .collection-item h3 {
+    flex: 2;
+    font-size: 1rem;
+}
+
+.collection-list .collection-item p {
+    flex: 1;
+    font-size: 0.85rem;
+    font-weight: 300;
+    text-align: right;
+}
+
+.collection-list .collection-item p span {
+    font-weight: 500;
+}
+
+.clickable {
+    user-select: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clickable:hover {
+    background-color: #e3e3e3;
+}
+
+.input[type="text"],
+.input[type="password"] {
+    padding: 10px;
+    border: 1px solid #e2e1df;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+    font-size: 0.9rem;
+    transition: border-color 0.3s;
+}
+
+.input[type="text"]:focus,
+.input[type="password"]:focus {
+    border-color: #e2e1df;
+}
+
+.input[type="number"] {
+    padding: 10px;
+    border: 1px solid #e2e1df;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+    font-size: 0.9rem;
+    transition: border-color 0.3s;
+}
+
+.input[type="number"]:focus {
+    border-color: #e2e1df;
+}
+
+.textarea {
+    padding: 10px;
+    border: 1px solid #e2e1df;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+    font-size: 0.9rem;
+    transition: border-color 0.3s;
+}
+
+.select {
+    padding: 10px;
+    border: 1px solid #e2e1df;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+    font-size: 0.9rem;
+    transition: border-color 0.3s;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary);
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.button:disabled {
+    background-color: #e2e1df;
+    cursor: not-allowed;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+.button.negative {
+    background-color: #FF0000;
+}
+
+.button.icon {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.stretch {
+    flex: 1;
+}
+
+.screen-api-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding-bottom: 20px;
+}
+
+.screen-api-box p {
+    font-size: 1.05rem;
+    font-weight: 300;
+}
+
+.screen-api-box p span {
+    margin-right: 5px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+    font-weight: 500;
+}
+
+.screen-api-box .input-inline {
+    width: 300px;
+    margin-left: 2px;
+    padding: 5px;
+    border: 1px solid #e2e1df;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: border-color 0.3s;
+}
+
+.screen-api-box .code-box {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+    font-size: 0.9rem;
+    font-weight: 300;
+    height: 320px;
+    overflow-y: auto;
+}
+
+.entry-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.entry-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #e2e1df51;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.entry-item:hover {
+    background-color: #e2e1df;
+}
+
+@media screen and (max-width: 1200px) {
+    .collection-list .collection-item h3 {
+        flex: 1;
+    }
+
+    .collection-list .collection-item p {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

@@ -9,8 +9,8 @@ class DatabaseComponent {
 public:
 
   OATPP_CREATE_COMPONENT(std::shared_ptr<CassSession>, scylla_session)([] {
-    CassCluster* cluster = Database::ScyllaDBSession::create_cluster(1);
-    CassSession* session = Database::ScyllaDBSession::create_db_session(cluster, 1);
+    CassCluster* cluster = Database::ScyllaDBSession::create_cluster();
+    CassSession* session = Database::ScyllaDBSession::create_db_session(cluster);
     return std::shared_ptr<CassSession>(session, cass_session_free);
   }());
 

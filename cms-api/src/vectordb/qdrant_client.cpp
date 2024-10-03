@@ -104,6 +104,8 @@ std::shared_ptr<QdrantHttpClient> create_client(int mode) {
     auto requestExecutor = client::HttpRequestExecutor::createShared(connectionProvider);
     auto objectMapper = std::make_shared<oatpp::parser::json::mapping::ObjectMapper>();
 
+    std::cout << "Qdrant client created with host: " << qdrant_host << " and port: " << qdrant_port << std::endl;
+
     return QdrantHttpClient::createShared(requestExecutor, objectMapper);
 };
 

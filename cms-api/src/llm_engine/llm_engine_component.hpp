@@ -8,7 +8,7 @@ class LLMEngineComponent {
 public:
 
   OATPP_CREATE_COMPONENT(std::shared_ptr<LLMEngine::OnnxRuntime::OnnxModel>, onnx_model)([] {
-    auto model = LLMEngine::OnnxRuntime::OnnxModel("../assets/model.onnx");
+    auto model = LLMEngine::OnnxRuntime::OnnxModel();
     return std::make_shared<LLMEngine::OnnxRuntime::OnnxModel>(model);
   }());
 

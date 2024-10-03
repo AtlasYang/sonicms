@@ -242,7 +242,7 @@ sonicms/
 ├── admin-panel/                # React Admin Panel
 ├── cms-api/                    # CMS API Backend
 ├── database/                   # ScyllaDB Setup
-├── docker-compose.yaml         # Docker Compose File
+├── compose.yaml                # Docker Compose File
 ├── .env                        # Environment Variables
 ├── .env.template               # Template for Environment Variables
 ├── LICENSE                     # MIT LICENSE File

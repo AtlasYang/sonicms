@@ -26,6 +26,8 @@ oatpp::Vector<oatpp::Object<CollectionDto>> CollectionService::read_collections(
             const CassValue* collection_id = cass_row_get_column_by_name(row, "collection_id");
             const CassValue* collection_name = cass_row_get_column_by_name(row, "collection_name");
             const CassValue* collection_schema = cass_row_get_column_by_name(row, "collection_schema");
+            const CassValue* enable_auto_embedding = cass_row_get_column_by_name(row, "enable_auto_embedding");
+            const CassValue* embedding_keys = cass_row_get_column_by_name(row, "embedding_keys");
             const CassValue* created_at = cass_row_get_column_by_name(row, "created_at");
             const CassValue* updated_at = cass_row_get_column_by_name(row, "updated_at");
 
@@ -49,6 +51,23 @@ oatpp::Vector<oatpp::Object<CollectionDto>> CollectionService::read_collections(
             cass_int64_t updated_at_int;    
             cass_value_get_int64(updated_at, &updated_at_int);
             collection->updated_at = updated_at_int;
+
+            cass_bool_t enable_auto_embedding_bool;
+            cass_value_get_bool(enable_auto_embedding, &enable_auto_embedding_bool);
+            collection->enable_auto_embedding = enable_auto_embedding_bool == cass_true;
+
+            CassIterator* embedding_keys_iterator = cass_iterator_from_collection(embedding_keys);
+            auto embedding_keys_list = oatpp::List<oatpp::String>::createShared();
+            if (embedding_keys_iterator){
+                while (cass_iterator_next(embedding_keys_iterator)) {
+                    const char* embedding_key_str;
+                    size_t embedding_key_str_len;
+                    cass_value_get_string(cass_iterator_get_value(embedding_keys_iterator), &embedding_key_str, &embedding_key_str_len);
+                    embedding_keys_list->push_back(oatpp::String(embedding_key_str, embedding_key_str_len));
+                }
+            }
+            collection->embedding_keys = embedding_keys_list;
+            cass_iterator_free(embedding_keys_iterator);
 
             const char* collection_schema_str;
             size_t collection_schema_str_len;
@@ -173,8 +192,6 @@ oatpp::Object<CollectionDto> CollectionService::create_collection(oatpp::Object<
     cass_statement_bind_int64(statement, 6, created_at);
 
     CassFuture* future = cass_session_execute(scylla_session.get(), statement);
-
-    std::cout << "Creating collection in minio" << std::endl;
 
     if (cass_future_error_code(future) == CASS_OK) {
         // create bucket in minio for collection

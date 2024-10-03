@@ -39,10 +39,11 @@ wget https://github.com/microsoft/onnxruntime/releases/download/v1.19.2/onnxrunt
     rm -rf onnxruntime-linux-x64-1.19.2.tgz
 
 # curlpp
-git clone https://github.com/jpbarrette/curlpp.git $ROOT_DIR/lib/curlpp && \
+wget https://github.com/jpbarrette/curlpp/archive/refs/tags/v0.8.1.tar.gz && \
+    tar -xvf v0.8.1.tar.gz && rm v0.8.1.tar.gz && \
+    mv curlpp-0.8.1 $ROOT_DIR/lib/curlpp && \
     cd $ROOT_DIR/lib/curlpp && \
-    mkdir -p build && \
-    cd build && \
+    mkdir build && cd build && \
     cmake .. && \
     make
 

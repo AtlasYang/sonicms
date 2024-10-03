@@ -127,6 +127,14 @@ EntryService::AutoEmbeddingFields EntryService::_check_collection_auto_embedding
                 const CassValue* embedding_keys = cass_row_get_column_by_name(row, "embedding_keys");
                 CassIterator* embedding_keys_iterator = cass_iterator_from_collection(embedding_keys);
 
+                if (!embedding_keys_iterator) {
+                    cass_iterator_free(iterator);
+                    cass_statement_free(statement);
+                    cass_future_free(future);
+
+                    return {false, {}};
+                }
+
                 std::vector<std::string> embedding_keys_vec;
                 while (cass_iterator_next(embedding_keys_iterator)) {
                     const char* embedding_key;
@@ -435,6 +443,7 @@ oatpp::Object<EntryDto> EntryService::delete_entry(oatpp::String collection_name
         return nullptr;
     }
     
+
     char collection_id_str[CASS_UUID_STRING_LENGTH];
     cass_uuid_string(*collection_id, collection_id_str);
 

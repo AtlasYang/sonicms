@@ -29,7 +29,7 @@ namespace LLMEngine { namespace OnnxRuntime {
 
     class OnnxModel {
         public:
-            OnnxModel(const char* model_path);
+            OnnxModel();
             ~OnnxModel();
             std::shared_ptr<Ort::Session> onnx_session;
             /**
