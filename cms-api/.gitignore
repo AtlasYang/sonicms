@@ -10,12 +10,7 @@ assets
 *.dev.sh
 
 # external dependencies
-lib/cpp-driver
-lib/curlpp
-lib/inih
-lib/minio-cpp
-lib/oatpp
-lib/onnxruntime
+lib/
 
 # vscode settings
 .vscode

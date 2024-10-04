@@ -6,6 +6,12 @@ apt-get update && apt-get install -y \
 
 ROOT_DIR=$(pwd)
 
+# install rust
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+source $HOME/.cargo/env
+
+mkdir -p $ROOT_DIR/lib
+
 # ScyllaDB C++ driver
 git clone https://github.com/scylladb/cpp-driver.git $ROOT_DIR/lib/cpp-driver && \
     cd $ROOT_DIR/lib/cpp-driver && \
@@ -56,3 +62,11 @@ git clone https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 $ROOT_DI
     cp $ROOT_DIR/lib/all-MiniLM-L6-v2/tokenizer.json $ROOT_DIR/assets/tokenizer.json && \
     cp $ROOT_DIR/lib/all-MiniLM-L6-v2/onnx/model.onnx $ROOT_DIR/assets/model.onnx && \
     rm -rf $ROOT_DIR/lib/all-MiniLM-L6-v2
+
+# Tokenizers C++ bindings
+git clone https://github.com/AtlasYang/tokenizers-cpp.git $ROOT_DIR/tokenizers-cpp && \
+    cd $ROOT_DIR/tokenizers-cpp/tokenizers && \
+    cargo build --release && \
+    mkdir -p $ROOT_DIR/lib/tokenizers && \
+    cp $ROOT_DIR/tokenizers-cpp/tokenizers/target/release/libtokenizers.so $ROOT_DIR/lib/tokenizers/libtokenizers.so && \
+    rm -rf $ROOT_DIR/tokenizers-cpp
