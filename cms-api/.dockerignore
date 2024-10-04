@@ -1,16 +1,8 @@
 # build artifacts
-build
+build/
+
+# assets
+assets/
 
 # dependencies
 lib/
-!lib/cpp-driver/build/*
-!lib/cpp-driver/include/*
-!lib/curlpp/build/*
-!lib/curlpp/include/*
-!lib/inih/*
-!lib/minio-cpp/build/*
-!lib/minio-cpp/include/*
-!lib/oatpp/build/*
-!lib/oatpp/src/*
-!lib/tokenizers/*
-!lib/onnxruntime/*

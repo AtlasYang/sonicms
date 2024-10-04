@@ -2,15 +2,16 @@
 apt-get update && apt-get install -y \
     libuv1-dev libssl-dev zlib1g-dev \
     pkg-config build-essential linux-libc-dev \
-    cmake git wget unzip curl zip tar
-
-ROOT_DIR=$(pwd)
+    cmake git git-lfs wget unzip curl zip tar python3 \
+    libcurlpp-dev libpugixml-dev nlohmann-json3-dev
 
 # install rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
-source $HOME/.cargo/env
+. $HOME/.cargo/env
 
-mkdir -p $ROOT_DIR/lib
+ROOT_DIR=$(pwd)
+
+mkdir -p $ROOT_DIR/lib && mkdir -p $ROOT_DIR/assets && mkdir -p $ROOT_DIR/build
 
 # ScyllaDB C++ driver
 git clone https://github.com/scylladb/cpp-driver.git $ROOT_DIR/lib/cpp-driver && \
@@ -18,7 +19,7 @@ git clone https://github.com/scylladb/cpp-driver.git $ROOT_DIR/lib/cpp-driver &&
     mkdir -p build && \
     cd build && \
     cmake .. && \
-    make
+    make -j
 
 # Oat++ web framework
 git clone -b 1.3.0-latest https://github.com/oatpp/oatpp.git $ROOT_DIR/lib/oatpp && \
@@ -26,7 +27,7 @@ git clone -b 1.3.0-latest https://github.com/oatpp/oatpp.git $ROOT_DIR/lib/oatpp
     mkdir -p build && \
     cd build && \
     cmake .. && \
-    make install
+    make install -j
 
 # Minio C++ SDK
 git clone https://github.com/minio/minio-cpp $ROOT_DIR/lib/minio-cpp && \
@@ -51,14 +52,13 @@ wget https://github.com/jpbarrette/curlpp/archive/refs/tags/v0.8.1.tar.gz && \
     cd $ROOT_DIR/lib/curlpp && \
     mkdir build && cd build && \
     cmake .. && \
-    make
+    make -j
 
 # inih
 git clone https://github.com/benhoyt/inih.git $ROOT_DIR/lib/inih
 
 # ONNX Model assets
 git clone https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 $ROOT_DIR/lib/all-MiniLM-L6-v2 && \
-    mkdir -p $ROOT_DIR/assets && \
     cp $ROOT_DIR/lib/all-MiniLM-L6-v2/tokenizer.json $ROOT_DIR/assets/tokenizer.json && \
     cp $ROOT_DIR/lib/all-MiniLM-L6-v2/onnx/model.onnx $ROOT_DIR/assets/model.onnx && \
     rm -rf $ROOT_DIR/lib/all-MiniLM-L6-v2
@@ -70,3 +70,6 @@ git clone https://github.com/AtlasYang/tokenizers-cpp.git $ROOT_DIR/tokenizers-c
     mkdir -p $ROOT_DIR/lib/tokenizers && \
     cp $ROOT_DIR/tokenizers-cpp/tokenizers/target/release/libtokenizers.so $ROOT_DIR/lib/tokenizers/libtokenizers.so && \
     rm -rf $ROOT_DIR/tokenizers-cpp
+
+# build the project
+cd $ROOT_DIR/build && cmake .. && make -j
