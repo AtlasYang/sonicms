@@ -65,13 +65,7 @@ Ensure that you have the following installed:
    ...
    ```
 
-3. **Install C++ packages**:
-
-   ```sh
-   cd ./cms-api && sh setup.linux.sh
-   ```
-
-4. **Run Docker Compose**:
+3. **Run Docker Compose**:
 
    Once the `.env` file is ready, navigate to the project root directory and start the CMS by running:
 
@@ -87,7 +81,7 @@ Ensure that you have the following installed:
    - **MinIO**: The object storage service for managing large media files.
    - **Qdrant**: The vector search engine.
 
-5. **Access the Application**:
+4. **Access the Application**:
 
    You can customize exposed ports in `.env` file.
 
