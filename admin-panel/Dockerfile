@@ -9,6 +9,10 @@ RUN npm install
 
 COPY . .
 
+ARG VITE_API_URL
+
+RUN echo "VITE_API_URL=$VITE_API_URL" > .env
+
 RUN npm run build
 
 FROM node:20.11-alpine

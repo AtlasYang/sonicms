@@ -4,7 +4,7 @@ import { EntryService } from "../service/entry";
 
 export default function useService() {
   const instance = axios.create({
-    baseURL: "http://localhost:9233",
+    baseURL: import.meta.env.VITE_API_URL,
     headers: {
       "Content-Type": "application/json",
     },

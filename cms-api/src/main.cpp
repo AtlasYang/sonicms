@@ -38,7 +38,8 @@ void run() {
   auto connectionProvider = oatpp::network::tcp::server::ConnectionProvider::createShared({"0.0.0.0", port, oatpp::network::Address::IP_4});
 
   oatpp::network::Server server(connectionProvider, connectionHandler);
-
+  
+  std::cout << "Server running on port " << port << std::endl;
   server.run();
 }
 

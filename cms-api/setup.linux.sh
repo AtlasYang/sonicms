@@ -1,13 +1,42 @@
 # install dependencies
 apt-get update && apt-get install -y \
     libuv1-dev libssl-dev zlib1g-dev \
-    pkg-config build-essential linux-libc-dev \
-    cmake git git-lfs wget unzip curl zip tar python3 \
-    libcurlpp-dev libpugixml-dev nlohmann-json3-dev
+    pkg-config build-essential ninja-build cmake \
+    git git-lfs wget unzip curl zip tar python3 \
+    libcurlpp-dev libpugixml-dev linux-libc-dev nlohmann-json3-dev 
 
 # install rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 . $HOME/.cargo/env
+
+# Set VCPKG_FORCE_SYSTEM_BINARIES to 1 for architectures arm, s390x, ppc64le and riscv (vcpkg settings)
+ARCH=$(uname -m)
+
+case "$ARCH" in
+  arm* | aarch64 | s390x | ppc64le | riscv*)
+    export VCPKG_FORCE_SYSTEM_BINARIES=1
+    echo "VCPKG_FORCE_SYSTEM_BINARIES is set to 1 for architecture: $ARCH"
+    ;;
+  *)
+    echo "No changes for architecture: $ARCH"
+    ;;
+esac
+
+# ONNX Runtime version
+ONNX_VERSION="1.19.2"
+# Set ONNX_FILE based on architecture
+case "$ARCH" in
+  x86_64)
+    ONNX_FILE="onnxruntime-linux-x64-${ONNX_VERSION}"
+    ;;
+  aarch64 | arm*)
+    ONNX_FILE="onnxruntime-linux-aarch64-${ONNX_VERSION}"
+    ;;
+  *)
+    echo "Unsupported architecture: $ARCH"
+    exit 1
+    ;;
+esac
 
 ROOT_DIR=$(pwd)
 
@@ -19,7 +48,7 @@ git clone https://github.com/scylladb/cpp-driver.git $ROOT_DIR/lib/cpp-driver &&
     mkdir -p build && \
     cd build && \
     cmake .. && \
-    make -j
+    make
 
 # Oat++ web framework
 git clone -b 1.3.0-latest https://github.com/oatpp/oatpp.git $ROOT_DIR/lib/oatpp && \
@@ -27,7 +56,7 @@ git clone -b 1.3.0-latest https://github.com/oatpp/oatpp.git $ROOT_DIR/lib/oatpp
     mkdir -p build && \
     cd build && \
     cmake .. && \
-    make install -j
+    make install
 
 # Minio C++ SDK
 git clone https://github.com/minio/minio-cpp $ROOT_DIR/lib/minio-cpp && \
@@ -40,10 +69,10 @@ git clone https://github.com/minio/minio-cpp $ROOT_DIR/lib/minio-cpp && \
     cmake --build ./build --config Debug
 
 # ONNX Runtime
-wget https://github.com/microsoft/onnxruntime/releases/download/v1.19.2/onnxruntime-linux-x64-1.19.2.tgz && \
-    tar -xvzf onnxruntime-linux-x64-1.19.2.tgz && \
-    mv onnxruntime-linux-x64-1.19.2 $ROOT_DIR/lib/onnxruntime && \
-    rm -rf onnxruntime-linux-x64-1.19.2.tgz
+wget "https://github.com/microsoft/onnxruntime/releases/download/v${ONNX_VERSION}/${ONNX_FILE}.tgz" && \
+    tar -xvzf ${ONNX_FILE}.tgz && \
+    mv ${ONNX_FILE} $ROOT_DIR/lib/onnxruntime && \
+    rm -rf ${ONNX_FILE}.tgz
 
 # curlpp
 wget https://github.com/jpbarrette/curlpp/archive/refs/tags/v0.8.1.tar.gz && \
@@ -52,7 +81,7 @@ wget https://github.com/jpbarrette/curlpp/archive/refs/tags/v0.8.1.tar.gz && \
     cd $ROOT_DIR/lib/curlpp && \
     mkdir build && cd build && \
     cmake .. && \
-    make -j
+    make
 
 # inih
 git clone https://github.com/benhoyt/inih.git $ROOT_DIR/lib/inih
@@ -72,4 +101,4 @@ git clone https://github.com/AtlasYang/tokenizers-cpp.git $ROOT_DIR/tokenizers-c
     rm -rf $ROOT_DIR/tokenizers-cpp
 
 # build the project
-cd $ROOT_DIR/build && cmake .. && make -j
+cd $ROOT_DIR/build && cmake .. && make

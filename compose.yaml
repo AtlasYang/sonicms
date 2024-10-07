@@ -79,6 +79,8 @@ services:
       context: ./admin-panel
       dockerfile: Dockerfile
       network: host
+      args:
+        - VITE_API_URL=${CMS_API_URL}
     container_name: sonicms-web-client
     ports:
       - "${ADMIN_PANEL_PORT}:3000"
