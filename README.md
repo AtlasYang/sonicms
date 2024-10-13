@@ -7,8 +7,6 @@
 <h3 align="center">Cloud-friendly, high-performance headless CMS</h3>
 <p align="center">Fast, scalable, and reliable content delivery system built on top of C++</p>
 
-[![logo](https://storage.luidium.lighterlinks.io/media/sonicms-logo.png)](https://storage.luidium.lighterlinks.io/media/sonicms-demo-1.mp4)
-
 ## Key Features
 
 - **Cloud-friendly Architecture**: Designed to easily deploy on cloud environments with scalability and flexibility in mind.
