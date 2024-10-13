@@ -4,12 +4,10 @@
   </a>
 </p>
 
-<p align="center">
-  <video src="https://storage.luidium.lighterlinks.io/media/sonicms-demo-1.mp4" controls autoplay width="720px" />
-</p>
-
 <h3 align="center">Cloud-friendly, high-performance headless CMS</h3>
 <p align="center">Fast, scalable, and reliable content delivery system built on top of C++</p>
+
+[![logo](https://storage.luidium.lighterlinks.io/media/sonicms-logo.png)](https://storage.luidium.lighterlinks.io/media/sonicms-demo-1.mp4)
 
 ## Key Features
 
