@@ -89,10 +89,6 @@ namespace Test { namespace ScyllaDBSessionTest {
         // insert data
         statement = cass_statement_new("INSERT INTO collection_entries (collection_id, entry_id, data, created_at, updated_at) VALUES (?, ?, ?, toTimestamp(now()), toTimestamp(now()))", 3);
 
-
-        // insert data into the map, example: {"title": "title 1", "content": "content 1"}
-        // from 1 to 10
-
         for (int i = 1; i <= 10; i++) {
             CassUuid collection_id = Database::ScyllaDBUtils::generate_uuid(uuid_gen);
             CassUuid entry_id = Database::ScyllaDBUtils::generate_uuid(uuid_gen);
