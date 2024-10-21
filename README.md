@@ -7,7 +7,11 @@
 <h3 align="center">Cloud-friendly, high-performance headless CMS</h3>
 <p align="center">Fast, scalable, and reliable content delivery system built on top of C++</p>
 
-https://github.com/user-attachments/assets/dbc5ffb3-bbb4-45e0-9c43-76629c591314
+<p align="center">
+  <a>
+   <img src="https://storage.luidium.lighterlinks.io/media/sonicms-demo-1.gif" alt="demo">
+  </a>
+</p>
 
 ## Key Features
 
