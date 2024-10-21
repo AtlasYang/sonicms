@@ -87,7 +87,17 @@ Ensure that you have the following installed:
    - **MinIO**: The object storage service for managing large media files.
    - **Qdrant**: The vector search engine.
 
-4. **Access the Application**:
+4. **Claim MinIO Access Key and Secret Key**:
+
+   Open your browser and navigate to `http://localhost:[MINIO_WEB_ADMIN_PORT]` to access the MinIO admin console.
+   In the admin console, go to **Access Keys** and click **Create Access Key**.
+
+   Once generated, update the `.env` file with the new credentials:
+
+   - `STORAGE_ACCESS_KEY` = _[your new access key]_
+   - `STORAGE_SECRET_KEY` = _[your new secret key]_
+
+5. **Access the Application**:
 
    You can customize exposed ports in `.env` file.
 
