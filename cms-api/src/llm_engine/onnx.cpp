@@ -59,12 +59,15 @@ namespace LLMEngine { namespace OnnxRuntime {
         char* encoded = tokenizer.encode_sentence(sentence);
 
         std::vector<int64_t> input_ids = LLMEngine::OnnxRuntime::Utils::parse_encoded_to_vector(encoded);
+        size_t total_tokens = input_ids.size();
         std::vector<int64_t> attention_mask(input_ids.size(), 1);
 
         Ort::MemoryInfo memory_info = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
 
-        std::vector<int64_t> input_shape = {1, 128};
-        std::vector<int64_t> attention_shape = {1, 128};
+        int max_token_length = 128;
+
+        std::vector<int64_t> input_shape = {1, max_token_length};
+        std::vector<int64_t> attention_shape = {1, max_token_length};
 
         Ort::Value input_ids_tensor = Ort::Value::CreateTensor<int64_t>(memory_info, input_ids.data(), input_ids.size(), input_shape.data(), input_shape.size());
         Ort::Value attention_mask_tensor = Ort::Value::CreateTensor<int64_t>(memory_info, attention_mask.data(), attention_mask.size(), attention_shape.data(), attention_shape.size());
