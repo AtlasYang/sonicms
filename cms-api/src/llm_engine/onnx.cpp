@@ -59,7 +59,6 @@ namespace LLMEngine { namespace OnnxRuntime {
         char* encoded = tokenizer.encode_sentence(sentence);
 
         std::vector<int64_t> input_ids = LLMEngine::OnnxRuntime::Utils::parse_encoded_to_vector(encoded);
-        size_t total_tokens = input_ids.size();
         std::vector<int64_t> attention_mask(input_ids.size(), 1);
 
         Ort::MemoryInfo memory_info = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);

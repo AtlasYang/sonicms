@@ -46,13 +46,17 @@ private:
 
 public:
     const std::string default_collection_name = "default";
+
     /**
      * Constructor
      * 
      * @param mode 0: production, 1: development
      */
     Client(int mode = 0);
+
+    Client& operator=(const Client& other);
     ~Client();
+
     /**
      * Read collection
      * 
@@ -60,6 +64,7 @@ public:
      * @return 0: success, 1: error
      */
     int read_collection(std::string collection_name);
+
     /**
      * Create collection
      * 
@@ -68,6 +73,7 @@ public:
      * @return 0: success, 1: error
      */
     int create_collection(std::string collection_name, int vec_size);
+
     /**
      * Insert points
      * 
@@ -78,6 +84,7 @@ public:
      * @return 0: success, 1: error
      */
     int insert_points(std::string collection_name, std::string entry_id, std::string collection_id, std::vector<float> vector);
+    
     /**
      * Update points
      * 
@@ -87,6 +94,7 @@ public:
      * @return 0: success, 1: error
      */
     int update_points(std::string collection_name, std::string entry_id, std::vector<float> vector);
+    
     /**
      * Search points based on cosine similarity from embedding corresponding to entry_id
      * 
@@ -97,6 +105,7 @@ public:
      * @return std::vector<std::string>
      */
     std::vector<Point> search_points(std::string collection_name, std::string collection_id, std::string entry_id, int limit);
+    
     /**
      * Delete points
      * 
@@ -105,6 +114,7 @@ public:
      * @return 0: success, 1: error
      */
     int delete_points(std::string collection_name, std::vector<std::string> uuid_ids);
+    
     /**
      * Delete points by collection id
      * 

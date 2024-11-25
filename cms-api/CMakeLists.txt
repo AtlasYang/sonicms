@@ -4,6 +4,13 @@ project(cms-api VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+FetchContent_MakeAvailable(googletest)
+
 find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(pugixml CONFIG REQUIRED)
@@ -21,7 +28,7 @@ include_directories(include ${CMAKE_SOURCE_DIR}/src)
 include_directories(include ${CMAKE_SOURCE_DIR}/src/app)
 include_directories(include ${CMAKE_SOURCE_DIR}/test)
 
-set(SOURCES
+set(COMMON_SOURCES
     lib/inih/cpp/INIReader.cpp
     lib/inih/ini.c
     src/database/scylla_db_session.cpp
@@ -36,12 +43,9 @@ set(SOURCES
     src/app/entry/entry_service.cpp
     src/llm_engine/tokenizer.cpp
     src/llm_engine/onnx.cpp
-    test/qdrant_client_test.cpp
-    test/json_test.cpp
-    src/main.cpp
 )
 
-add_executable(cms-api ${SOURCES})
+add_executable(cms-api ${COMMON_SOURCES} src/main.cpp)
 
 link_directories(${CMAKE_SOURCE_DIR}/lib/cpp-driver/build)
 
@@ -57,3 +61,30 @@ target_link_libraries(cms-api ZLIB::ZLIB)
 target_link_libraries(cms-api pugixml::pugixml)
 target_link_libraries(cms-api nlohmann_json nlohmann_json::nlohmann_json)
 target_link_libraries(cms-api CURL::libcurl)
+
+enable_testing()
+
+add_executable(
+    tests
+    ${COMMON_SOURCES}
+    test/json_test.cpp
+    test/scylla_db_session_test.cpp
+    test/qdrant_client_test.cpp
+)
+
+target_link_libraries(tests ${CMAKE_SOURCE_DIR}/lib/oatpp/build/src/liboatpp.a)
+target_link_libraries(tests ${CMAKE_SOURCE_DIR}/lib/cpp-driver/build/libscylla-cpp-driver.so)
+target_link_libraries(tests ${CMAKE_SOURCE_DIR}/lib/minio-cpp/build/libminiocpp.a)
+target_link_libraries(tests ${CMAKE_SOURCE_DIR}/lib/curlpp/build/libcurlpp.so)
+target_link_libraries(tests ${CMAKE_SOURCE_DIR}/lib/tokenizers/libtokenizers.so)
+target_link_libraries(tests ${CMAKE_SOURCE_DIR}/lib/onnxruntime/lib/libonnxruntime.so)
+target_link_libraries(tests OpenSSL::SSL)
+target_link_libraries(tests OpenSSL::Crypto)
+target_link_libraries(tests ZLIB::ZLIB)
+target_link_libraries(tests pugixml::pugixml)
+target_link_libraries(tests nlohmann_json nlohmann_json::nlohmann_json)
+target_link_libraries(tests CURL::libcurl)
+target_link_libraries(tests GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(tests)

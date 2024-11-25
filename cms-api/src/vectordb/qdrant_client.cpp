@@ -113,6 +113,13 @@ Client::Client(int mode) {
     client = create_client(mode);
 }
 
+Client& Client::operator=(const Client& other) {
+    if (this != &other) {
+        client = other.client;
+    }
+    return *this;
+}
+
 Client::~Client() {
     client.reset();
 }

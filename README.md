@@ -9,7 +9,7 @@
 
 <p align="center">
   <a>
-   <img src="https://storage.luidium.lighterlinks.io/media/sonicms-demo-1.gif" alt="demo">
+   <img src="https://storage.luidium.lighterlinks.io/media/sonicms-demo-1.gif" alt="demo" width="720px">
   </a>
 </p>
 

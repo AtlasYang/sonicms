@@ -1,8 +1,10 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <nlohmann/json.hpp>
 
 using namespace std;
+using json = nlohmann::json;
 
 namespace Utils { namespace Strings {
     /**
@@ -13,11 +15,20 @@ namespace Utils { namespace Strings {
      * @return vector<string>
      */
     vector<string> split(string input, char delimiter);
-
+    
     /**
      * Validate a JSON object against a JSON schema
      * 
      * @param schema The JSON schema
+     * @param data The JSON object to validate
+     * @return bool
+     */
+    bool validate_json(const json& schema, const json& data);
+
+    /**
+     * Validate a JSON object against a JSON schema
+     * 
+     * @param schema_str The JSON schema string
      * @param data The JSON object to validate
      * @return bool
      */

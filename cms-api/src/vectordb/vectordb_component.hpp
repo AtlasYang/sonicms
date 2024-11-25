@@ -8,7 +8,7 @@ class VectorDBComponent {
 public:
 
   OATPP_CREATE_COMPONENT(std::shared_ptr<VectorDB::QdrantClient::Client>, qdrant_client)([] {
-    auto client = VectorDB::QdrantClient::Client();
+    auto client = VectorDB::QdrantClient::Client(1);
     client.create_collection("default", 384);
     return std::make_shared<VectorDB::QdrantClient::Client>(client);
   }());
